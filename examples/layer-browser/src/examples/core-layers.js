@@ -425,12 +425,49 @@ const TextLayerExample = {
       name: 'fontFamily',
       type: 'category',
       value: ['Monaco', 'Helvetica', 'Garamond', 'Palatino', 'Courier', 'Courier New']
+    },
+    // , 'buffer', 'sdf', 'radius', 'cutoff', 'fontWeight'
+    fontSettings: {type: 'compound', elements: ['fontSize', 'buffer', 'sdf', 'radius', 'cutoff']},
+    fontSize: {
+      type: 'number',
+      max: 100,
+      onUpdate: (newValue, newSettings, change) => {
+        change('fontSettings', {...newSettings.fontSettings, fontSize: newValue});
+      }
+    },
+    buffer: {
+      type: 'number',
+      max: 100,
+      onUpdate: (newValue, newSettings, change) => {
+        change('fontSettings', {...newSettings.fontSettings, buffer: newValue});
+      }
+    },
+    sdf: {
+      type: 'boolean',
+      onUpdate: (newValue, newSettings, change) => {
+        change('fontSettings', {...newSettings.fontSettings, sdf: newValue});
+      }
+    },
+    radius: {
+      type: 'number',
+      max: 20,
+      onUpdate: (newValue, newSettings, change) => {
+        change('fontSettings', {...newSettings.fontSettings, radius: newValue});
+      }
+    },
+    cutoff: {
+      type: 'number',
+      max: 1,
+      onUpdate: (newValue, newSettings, change) => {
+        change('fontSettings', {...newSettings.fontSettings, cutoff: newValue});
+      }
     }
   },
   props: {
     id: 'textgetAnchorX-layer',
     sizeScale: 1,
     fontFamily: 'Monaco',
+    fontSettings: {},
     getText: x => x.LOCATION_NAME,
     getPosition: x => x.COORDINATES,
     getColor: x => [153, 0, 0],
